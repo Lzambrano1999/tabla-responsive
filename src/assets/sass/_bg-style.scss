@@ -1,0 +1,504 @@
+@charset "UTF-8";
+@use "sass:map";
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600&display=swap");
+@import '_variables.scss';
+
+$color-brand-blue:#160F41;
+$color-gray-02:#877FAC;
+$color-gray-03:#CFCCDE; 
+$color-gray-04:#F3F2F7;
+$color-black:#333333;
+$color-alert:#FF8585;
+$color-success:#6FCF97;
+$color-white:#FAFAFC;
+$color-pure-white:#fff;
+$font-family: "Nunito Sans", sans-serif;
+
+
+.bg-option{
+    color: $color-black;
+    text-transform: uppercase;
+}
+
+.bg-dropdown {
+    position: relative;
+    border: 0;
+    //border-radius: 5px;
+    border-radius: 15px;
+    background-color: rgba($color-brand-blue, 0.02);
+    border: 1px solid $color-gray-03;
+    overflow: hidden;
+
+    
+  
+    .bg-select {
+      font-size: 1rem;
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+      background-color: white;
+      cursor: pointer;
+      outline: none;
+      width: 100%;
+      border: 0;
+      border-radius: 0;
+      color: $color-gray-03;
+      //padding: 1.5rem 3rem 1.5rem 1.5rem;
+      padding: .6rem 3rem .6rem .6rem; //Tamaño del select
+      
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      -ms-appearance: none;
+      appearance: none;
+      transition: all 300ms;
+
+      &.select-selected{
+        color: $color-black;
+        text-transform: uppercase;
+      }
+  
+      &:-ms-expand {
+        display: none !important;
+      }
+  
+  
+  
+      &:hover {
+        background-color: $color-gray-04;
+      }
+  
+    }
+  
+    &:before {
+      font-family: "Font Awesome 5 Free"; 
+      font-weight: 900; 
+      content: "\f0d7";
+      position: absolute;
+      right: 1rem;
+      //top: 40%; //mueve la flecha
+      top: 25%; //mueve la flecha
+      font-size: 1.5rem;
+      color: $color-gray-03;
+      pointer-events: none;
+    }
+  }
+  
+  .no-show-pseudo.bg-dropdown:before {
+    content: '';
+  }
+
+
+  .bg-dropdownfield {
+    position: relative;
+    margin: 2rem 0;
+    width: 100%;
+    text-align: left;
+
+    &.bordes{
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid $color-gray-03;   
+    }
+  
+    select {
+      width: 100%;
+  
+      &:focus~.bg-helper {
+        opacity: 1;
+      }
+    }
+  
+    label {
+      font-size: 15px;
+      margin-bottom: 1rem;
+      display: block;
+      color: $color-black;
+    }
+  
+    &:after {
+      font-family: 'Font Awesome 5 Free';
+      font-size: 1rem;
+      position: absolute;
+      right: 0;
+      bottom: 5rem;
+      opacity: 0;
+      transition: all 300ms ease-in-out;
+    }
+  
+    .bg-helper {
+      color: $color-gray-03;
+      transition: all 0.15s 0.15s ease-in-out;
+      margin-top: .5rem;
+    }
+  
+    &.bg-error {
+  
+      .bg-dropdown {
+        box-shadow: 0 0 3px $color-alert;
+        border: 1px solid $color-alert;
+  
+        &::before {
+          color: $color-alert;
+        }
+      }
+  
+      & select:hover {
+        background-color: rgba($color-alert, .20);
+      }
+  
+  
+  
+      .bg-helper {
+        color: $color-alert;
+      }
+  
+    }
+  
+    &.bg-success {
+      input {
+        border-bottom: 1px solid $color-gray-02;
+      }
+  
+      &:after {
+        content: '\e807';
+        transform: translateY(-4.6rem);
+        color: $color-gray-02;
+        opacity: 1;
+      }
+  
+    }
+  
+    &.bg-loader {
+      .bg-dropdown:before {
+        content: "";
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        display: inline-block;
+        border: 2px solid $color-gray-04;
+        border-bottom: 3px solid transparent;
+        animation: spin 1s linear infinite forwards;
+      }
+    }
+  
+}
+
+/*TextField*/
+
+.bg-textfield {
+    position: relative;
+    margin: 2rem 0;
+    width: 100%;
+    text-align: left;
+
+    &.bordes{
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid $color-gray-03;   
+    }
+  
+    .bg-state {
+      position: absolute;
+      top: 50%;
+      right: 1rem;
+      transform: translateY(-50%);
+    }
+  
+    input {
+      width: 100%;
+  
+      &::placeholder {
+        color: $color-gray-03;
+        opacity: 1;
+      }
+  
+      &::-ms-clear {
+        display: none;
+      }
+  
+      &:-ms-input-placeholder {
+        color: $color-gray-03;
+      }
+  
+      &:hover {
+        background-color: $color-gray-04;
+        border-radius:15px;
+        cursor: pointer;
+      }
+      &[type="password"] + .bg-state, &[data-pass="true"] + .bg-state {
+        cursor: pointer;
+      }
+      &[type="password"] + .bg-state::after {
+        font-family: caret;
+        content: '\e81e';
+        font-size: 1rem;
+        opacity: 1;
+        color: $color-gray-03;
+      }
+       &[data-pass="open"] + .bg-state::after{
+        font-family: caret;
+        content: '\e81f';
+        font-size: 1rem;
+        opacity: 1;
+        color: $color-gray-03;
+        
+      }
+       &[data-pass="closed"] + .bg-state::after{
+        font-family: caret;
+        content: '\e81e';
+        font-size: 1rem;
+        opacity: 1;
+        color: $color-gray-03;
+      
+    }
+  
+  
+    }
+  
+    label {
+      font-size: 15px;
+      /*margin-bottom: 1rem;*/
+      display: block;
+      color: $color-black;
+    }
+  
+    textarea {
+      width: 100%;
+      height: 100%;
+    }
+  
+    &:after {
+      font-family: 'caret';
+      font-size: 1rem;
+      position: absolute;
+      right: 0;
+      top: 5rem;
+      opacity: 0;
+      transition: all 300ms ease-in-out;
+    }
+  
+    .bg-helper {
+      display: inline-block;
+      color: $color-gray-02;
+      transition: all 0.15s 0.15s ease-in-out;
+      margin-top: 0.5rem;
+      pointer-events: none;
+      opacity: 0;
+  
+  
+      &.bg-helper-lock {
+        opacity: 1;
+      }
+  
+      &.bg-helper-show-on-exit {
+        animation: endAnimation .5s linear forwards;
+  
+      }
+  
+      &.bg-helper-show {
+        animation: initAnimation .3s linear forwards;
+      }
+    }
+  
+    .bg-helper-link {
+      font-size: 1.4rem !important;
+      text-decoration: none;
+    }
+  
+    .bg-counter {
+      display: inline-block;
+      color: $color-gray-02;
+      margin-top: 0.5rem;
+      position: absolute;
+      right: 0;
+      font-size: 1.4rem !important;
+    }
+  
+    &.bg-success {
+      .bg-state::after {
+        font-family: caret;
+        content: '\e80e';
+        color: $color-success;
+        opacity: 1;
+        font-size: 1rem;
+      }
+    }
+  
+    &.bg-calendar {
+  
+  
+      .bg-state::after {
+        font-family: caret;
+        content: '\e813';
+        opacity: 1;
+        color: $color-gray-03;
+        font-size: 1rem;
+      }
+    }
+  
+    &.bg-error {
+      input {
+        box-shadow: 0 0 3px $color-alert;
+        border: 1px solid $color-alert;
+        border-radius: 15px;
+      }
+  
+      .bg-helper {
+        color: $color-alert;
+        opacity: 1;
+      }
+  
+  
+      .bg-state::after {
+        font-family: caret;
+        content: '\e80a';
+        color: $color-alert;
+        opacity: 1;
+        font-size: 1rem;
+      }
+  
+    }
+  
+    &.bg-loading {
+  
+      .bg-state {
+        position: absolute;
+        top: 50%;
+        right: 2%;
+        transform: translateY(-50%);
+      }
+  
+      .bg-state::after {
+        content: '';
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        display: inline-block;
+        border: 2px solid $color-gray-04;
+        border-bottom: 3px solid transparent;
+        animation: spin 1s linear infinite forwards;
+      }
+    }
+  
+    &.bg-readonly {
+  
+      input {
+        background-color: $color-white;
+      }
+  
+      .bg-state {
+        position: absolute;
+        top: 50%;
+        right: 2%;
+        transform: translateY(-50%);
+      }
+  
+      .bg-state::after {
+        font-family: caret;
+        content: '\e803';
+        color: $color-gray-03;
+        opacity: 1;
+        font-size: 1rem;
+      }
+    }
+  
+  }
+  
+  @keyframes initAnimation {
+    0% {
+      transform: translateY(-125%);
+      opacity: 0;
+    }
+  
+    60% {
+      opacity: 0;
+    }
+  
+    100% {
+      transform: none;
+      opacity: 1;
+    }
+  }
+  
+  @keyframes endAnimation {
+    0% {
+      opacity: 1;
+    }
+  
+    100% {
+      opacity: 0;
+    }
+  }
+
+
+  .bg-textbox {
+    padding: .5rem 3rem .5rem .5rem; //Tamaño del textbox
+    //padding-left: 1rem;
+    //height: 5rem;
+    //padding-right: 3rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    position: relative;
+    border: 0;
+    outline: 0;
+    color: $color-black;
+    background-color: $color-pure-white;
+    border-radius: 15px;
+    border: 1px solid $color-gray-03;
+    
+  
+    &:focus {
+      background-color: $color-gray-04;
+    }
+  
+    &::placeholder {
+      text-decoration: initial;
+    }
+  
+    transition: all 300ms;
+    //font-family: $font-family;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  
+  
+    &[type='number']::-webkit-outer-spin-button,
+    &[type='number']::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  
+    &[type='number'] {
+      -moz-appearance: textfield;
+  
+      &:focus {
+        border-radius: 15px;
+        background-color: $color-gray-04;
+      }
+    }
+  
+    // &:required:invalid {
+    //   //border-color: inherit !important;
+    // }
+  
+    &.bg-blurred {
+      border: none;
+      border-radius: 0;
+      border-bottom: 1px solid $color-gray-03;
+    }
+  
+  }
+  
+  textarea.bg-textbox,
+  [type='text'].bg-textbox,
+  [type='email'].bg-textbox [type='phone'].bg-textbox {
+  
+    &:focus {
+      background-color: $color-gray-04;
+    }
+  }
+  
+  textarea.bg-textbox:read-only {
+    background-color: transparent;
+    appearance: none;
+    border: 1px solid $color-brand-blue;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    resize: none;
+  }

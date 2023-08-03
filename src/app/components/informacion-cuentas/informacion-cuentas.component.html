@@ -1,0 +1,447 @@
+<!-- <header-output (identificacion)="obtenerInformacionCuentas($event)"></header-output> -->
+<div class="container-fluid" style="overflow: auto;" *ngIf="data?.cuentas!.length > 0 || data?.seguros!.length > 0 || data?.tarjetas!.length > 0">
+    <div class="row justify-content-center my-4" style="max-width: 90%">
+        
+        <table class="invisible-table-informacion-cuentas col-sm-12 col-md-10 col-lg-8 col-xl-7" *ngIf="cuentas!.length > 0">
+            <thead>
+                <tr style="background-color: #F9F9F9;">
+                    <th class="invisible-table-informacion-cuentas__titulo-tabla break-spaces" colspan="2">
+                        <span class="font-weight-bold my-2">DATOS: </span>
+                    </th>
+                    <td ></td>
+                    <td class="no-mostrar-columna-2"></td>
+                    <td class="font-weight-bold text-right">         
+                        ${{obtenerTotalSeccion('pasivos')[0]}}
+                    </td>
+                    <td class="font-weight-bold text-right"> 
+                        ${{obtenerTotalSeccion('pasivos')[1]}}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #F9F9F9;"></th>
+                    <th colspan="3" class="font-weight-bold">
+                        CUENTAS
+                    </th>
+                    <th ></th>
+                    <th class="no-mostrar-columna-2"></th>
+                </tr>
+                <tr>
+                    <th style="background-color: #F9F9F9;"></th>
+                    <th>Producto</th>
+                    <th class="no-mostrar-columna">Número</th>
+                    <th >Relación</th>
+                    <th class="text-right">Saldo</th>
+                    <th class="text-right">Efectivo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr (click)="verDetalle(cuenta, 'cuentas' )" *ngFor="let cuenta of cuentas; let indice = index">
+                    <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
+                    <td>{{ enmascararTipo( cuenta.masa, cuenta.tip ) }}</td>
+                    <td class="no-mostrar-columna">{{ cuenta.mtcuenta }}</td>
+                    <td >{{ enmascararRelacion( cuenta.clkRelacion ) }}</td>
+                    <td class="text-right">$ {{ obtenerNumeroFormateado(cuenta.saldoTotal) }}</td>
+                    <td class="text-right">$ {{ obtenerNumeroFormateado(cuenta.efectivo) }}</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
+                    <td></td>
+                    <td ></td>
+                    <td class="no-mostrar-columna-2"></td>
+                    <td class="font-weight-bold text-right"> ${{obtenerTotalSeccion('pasivos', 'cuentas')[0]}} </td>
+                    <td class="font-weight-bold text-right"> ${{obtenerTotalSeccion('pasivos', 'cuentas')[1]}} </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="invisible-table-informacion-cuentas col-sm-12 col-md-10 col-lg-8 col-xl-7 mt-4" *ngIf="inversiones!.length > 0">
+            <thead>
+                <tr style="background-color: #F9F9F9;">
+                    <th class="invisible-table-informacion-cuentas__titulo-tabla break-spaces" colspan="2">
+                        <span *ngIf="cuentas!.length == 0 && otrosPasivos!.length == 0" class="font-weight-bold my-2">PASIVOS: </span>
+                    </th>
+                    <td ></td>
+                    <td class="no-mostrar-columna-2"></td>
+                    <td class="font-weight-bold text-right">         
+                       <span [ngClass]=" (cuentas!.length == 0 && otrosPasivos!.length == 0) ? 'visible' : 'invisible'">
+                           ${{obtenerTotalSeccion('pasivos')[0]}}
+                       </span>
+                    </td>
+                    <td class="font-weight-bold text-right"> 
+                        <span [ngClass]="(cuentas!.length == 0 && otrosPasivos!.length == 0) ? 'visible' : 'invisible'">
+                            ${{obtenerTotalSeccion('pasivos')[1]}}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #F9F9F9;"></th>
+                    <th colspan="3" class="font-weight-bold">
+                        INVERSIONES
+                    </th>
+                    <th ></th>
+                    <th class="no-mostrar-columna-2"></th>
+                </tr>
+                <tr>
+                    <th style="background-color: #F9F9F9;"></th>
+                    <th>Producto</th>
+                    <th class="no-mostrar-columna">Número</th>
+                    <th >Relación</th>
+                    <th class="text-right">F. Vencimiento</th>
+                    <th class="text-right">Saldo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr (click)="verDetalle(inversion, 'inversiones' )" *ngFor="let inversion of inversiones; let indice = index">
+                    <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
+                    <td>{{ enmascararTipo( inversion.masa, inversion.tip ) }}</td>
+                    <td class="no-mostrar-columna">{{ inversion.mtcuenta }}</td>
+                    <td >{{ enmascararRelacion( inversion.clkRelacion ) }}</td>
+                    <td class="text-right">{{ enmascararFecha( inversion.vencimiento ) }}</td>
+                    <td class="text-right">$ {{ obtenerNumeroFormateado(inversion.saldoTotal) }}</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
+                    <td ></td>
+                    <td ></td>
+                    <th class="no-mostrar-columna-2"></th>
+                    <td class="font-weight-bold text-right"> </td>
+                    <td class="font-weight-bold text-right"> ${{obtenerTotalSeccion('pasivos', 'inversiones')[0]}} </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="invisible-table-informacion-cuentas col-sm-12 col-md-10 col-lg-8 col-xl-7 mt-4" *ngIf="otrosPasivos!.length > 0">
+            <thead>
+                <tr style="background-color: #F9F9F9;">
+                    <th class="invisible-table-informacion-cuentas__titulo-tabla break-spaces" colspan="2">
+                        <span *ngIf="cuentas!.length == 0 && inversiones!.length == 0" class="font-weight-bold my-2">PASIVOS: </span>
+                    </th>
+                    <td ></td>
+                    <td class="no-mostrar-columna-2"></td>
+                    <td class="font-weight-bold text-right">         
+                       <span [ngClass]="(cuentas!.length == 0 && inversiones!.length == 0) ? 'visible' : 'invisible'">
+                           ${{obtenerTotalSeccion('pasivos')[0]}}
+                       </span>
+                    </td>
+                    <td class="font-weight-bold text-right"> 
+                        <span [ngClass]="(cuentas!.length == 0 && inversiones!.length == 0) ? 'visible' : 'invisible'">
+                            ${{obtenerTotalSeccion('pasivos')[1]}}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #F9F9F9;"></th>
+                    <th colspan="3" class="font-weight-bold">
+                        OTROS PASIVOS
+                    </th>
+                    <th ></th>
+                    <th class="no-mostrar-columna-2"></th>
+                </tr>
+                <tr>
+                    <th style="background-color: #F9F9F9;"></th>
+                    <th>Producto</th>
+                    <th class="no-mostrar-columna">Número</th>
+                    <th >Relación</th>
+                    <th class="text-right">Saldo</th>
+                    <th class="text-right">F. Vencimiento</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr (click)="verDetalle(otros, 'otros' )" *ngFor="let otros of otrosPasivos; let indice = index">
+                    <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
+                    <td>{{ enmascararTipo( otros.masa, otros.tip ) }}</td>
+                    <td class="no-mostrar-columna">{{ otros.mtcuenta }}</td>
+                    <td>{{ enmascararRelacion( otros.clkRelacion ) }}</td>
+                    <td class="text-right">$ {{ obtenerNumeroFormateado(otros.saldoTotal) }}</td>
+                    <td class="text-right">{{ enmascararFecha( otros.vencimiento ) }}</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
+                    <td ></td>
+                    <td ></td>
+                    <th class="no-mostrar-columna-2"></th>
+                    <td class="font-weight-bold text-right"> ${{obtenerTotalSeccion('pasivos', 'otros')[0]}} </td>
+                    <td class="font-weight-bold text-right"> 
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="row justify-content-center my-4" style="max-width: 90%">
+        <table class="invisible-table-informacion-cuentas col-sm-12 col-md-10 col-lg-8 col-xl-7" *ngIf="tarjetas!.length > 0">
+            <thead>
+                <tr style="background-color: #F9F9F9;">
+                    <th class="invisible-table-informacion-cuentas__titulo-tabla break-spaces" colspan="2">
+                        <span class="font-weight-bold my-2">DATOS: </span>
+                    </th>
+                    <td ></td>
+                    <td class="no-mostrar-columna-2"></td>
+                    <td class="font-weight-bold text-right">
+                        ${{obtenerTotalSeccion('activos')[0]}}
+                    </td>
+                    <td class="font-weight-bold text-right"> 
+                        ${{obtenerTotalSeccion('activos')[1]}}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #F9F9F9;"></th>
+                    <th colspan="3" class="font-weight-bold">
+                        TARJETAS
+                    </th>
+                    <td ></td>
+                    <td class="no-mostrar-columna-2"></td>
+                </tr>
+                <tr>
+                    <th style="background-color: #F9F9F9;"></th>
+                    <th>Tarjeta</th>
+                    <th class="no-mostrar-columna">Número</th>
+                    <th >Relación</th>
+                    <th class="text-right">Cupo</th>
+                    <th class="text-right">Disponible</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr (click)="verDetalle(tarjeta, 'tarjetas' )" *ngFor="let tarjeta of tarjetas">
+                    <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
+                    <td> {{nombreTarjeta(tarjeta.tarjeta)}} </td>
+                    <td class="no-mostrar-columna">{{ tarjeta.tarjeta }}</td>
+                    <td>{{ tarjeta.principalAdicional == 'A' ? 'Adicional' : 'Principal' }}</td>
+                    <td class="text-right">${{ obtenerNumeroFormateado(tarjeta.cupo) }}</td>
+                    <td class="text-right">${{ obtenerNumeroFormateado(tarjeta.disponible) }}</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
+                    <td></td>
+                    <td ></td>
+                    <td class="no-mostrar-columna-2"></td>
+                    <td class="font-weight-bold text-right"> ${{obtenerTotalSeccion('activos', 'tarjeta')[0]}} </td>
+                    <td class="font-weight-bold text-right"> ${{obtenerTotalSeccion('activos', 'tarjeta')[1]}} </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="invisible-table-informacion-cuentas col-sm-12 col-md-10 col-lg-8 col-xl-7 mt-4" *ngIf="prestamos!.length > 0">
+            <thead>
+                <tr style="background-color: #F9F9F9;">
+                    <th class="invisible-table-informacion-cuentas__titulo-tabla break-spaces" colspan="2">
+                        <span *ngIf="tarjetas!.length == 0 && otrosActivos!.length == 0" class="font-weight-bold my-2">FINANCIACION: </span>
+                    </th>
+                    <td class="no-mostrar-columna"></td>
+                    <td class="no-mostrar-columna-2"></td>
+                    <td class="font-weight-bold text-right">
+                        <span [ngClass]="(tarjetas!.length == 0 && otrosActivos!.length == 0) ? 'visible' : 'invisible'">
+                            ${{obtenerTotalSeccion('activos')[0]}}
+                        </span>
+                    </td>
+                    <td class="font-weight-bold text-right">
+                        <span [ngClass]="(tarjetas!.length == 0 && otrosActivos!.length == 0) ? 'visible' : 'invisible'" >
+                            ${{obtenerTotalSeccion('activos')[1]}}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #F9F9F9;"></th>
+                    <th  class="font-weight-bold">
+                        PRESTAMOS
+                    </th>
+                    <td class="no-mostrar-columna"></td>
+                    <td class="no-mostrar-columna-2"></td>
+                </tr>
+                <tr>
+                    <th style="background-color: #F9F9F9;"></th>
+                    <th>Producto</th>
+                    <th class="no-mostrar-columna">Número</th>
+                    <th class="no-mostrar-columna-2">Concedido</th>
+                    <th class="text-right">Vencimiento</th>
+                    <th class="text-right">saldo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr (click)="verDetalle(prestamo, 'prestamos' )" *ngFor="let prestamo of prestamos">
+                    <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
+                    <td> {{ prestamo.tip }} </td>
+                    <td class="no-mostrar-columna">{{ prestamo.mtcuenta }}</td>
+                    <td  class="no-mostrar-columna-2">${{ obtenerNumeroFormateado(prestamo.saldoTotal) }}</td>
+                    <td class="text-right">{{ enmascararFecha(prestamo.vencimiento) }}</td>
+                    <td class="text-right">${{ obtenerNumeroFormateado(prestamo.efectivo) }}</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
+                    <td></td>
+                    <td class="no-mostrar-columna"></td>
+                    <td class="no-mostrar-columna-2"></td>
+                    <td class="font-weight-bold text-right"> ${{obtenerTotalSeccion('activos', 'prestamo')[0]}} </td>
+                    <td class="font-weight-bold text-right"> ${{obtenerTotalSeccion('activos', 'prestamo')[1]}} </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="invisible-table-informacion-cuentas col-sm-12 col-md-10 col-lg-8 col-xl-7 mt-4" *ngIf="otrosActivos!.length > 0">
+            <thead>
+                <tr style="background-color: #F9F9F9;">
+                    <th class="invisible-table-informacion-cuentas__titulo-tabla break-spaces" colspan="2">
+                        <span *ngIf="tarjetas!.length == 0 && prestamos!.length == 0" class="font-weight-bold my-2">FINANCIACION: </span>
+                    </th>
+                    <td class="no-mostrar-columna"></td>
+                    <td class="no-mostrar-columna-2"></td>
+                    <td class="font-weight-bold text-right">
+                        <span [ngClass]="(tarjetas!.length == 0 && prestamos!.length == 0) ? 'visible' : 'invisible'">
+                            ${{obtenerTotalSeccion('activos')[0]}}
+                        </span>
+                    </td>
+                    <td class="font-weight-bold text-right">
+                        <span [ngClass]="(tarjetas!.length == 0 && prestamos!.length == 0) ? 'visible' : 'invisible'" >
+                            ${{obtenerTotalSeccion('activos')[1]}}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #F9F9F9;"></th>
+                    <th colspan="3" class="font-weight-bold">
+                        OTROS ACTIVOS
+                    </th>
+                    <td class="no-mostrar-columna"></td>
+                    <td class="no-mostrar-columna-2"></td>
+                </tr>
+                <tr>
+                    <th style="background-color: #F9F9F9;"></th>
+                    <th>Producto</th>
+                    <th class="no-mostrar-columna">Número</th>
+                    <th class="no-mostrar-columna-2">Vencimiento</th>
+                    <th class="text-right">Concedido</th>
+                    <th class="text-right">saldo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr (click)="verDetalle(otros, 'otros' )" *ngFor="let otros of otrosActivos">
+                    <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
+                    <td> {{ otros.tip }} </td>
+                    <td class="no-mostrar-columna">{{ otros.mtcuenta }}</td>
+                    <td  class="no-mostrar-columna-2">{{ enmascararFecha(otros.vencimiento) }}</td>
+                    <td class="text-right">${{ obtenerNumeroFormateado(otros.saldoTotal) }}</td>
+                    <td class="text-right">${{ obtenerNumeroFormateado(otros.efectivo) }}</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
+                    <td></td>
+                    <td class="no-mostrar-columna"></td>
+                    <td class="no-mostrar-columna-2"></td>
+                    <td class="font-weight-bold text-right"> ${{obtenerTotalSeccion('activos', 'otros')[0]}} </td>
+                    <td class="font-weight-bold text-right"> ${{obtenerTotalSeccion('activos', 'otros')[1]}} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="row justify-content-center my-4" style="max-width: 90%">
+        <table class="invisible-table-informacion-cuentas col-sm-12 col-md-10 col-lg-8 col-xl-7" *ngIf="seguros!.length > 0">
+            <thead>
+                <tr style="background-color: #F9F9F9;">
+                    <th class="invisible-table-informacion-cuentas__titulo-tabla break-spaces" colspan="2">
+                        <span class="font-weight-bold my-2">DATOS: </span>
+                    </th>
+                    <td class="no-mostrar-columna"></td>
+                    <td class="no-mostrar-columna-2"></td>
+                    <td class="font-weight-bold text-right">         
+                        ${{obtenerTotalSeccion('seguros')[0]}}
+                    </td>
+                    <td class="font-weight-bold text-right"> 
+                        ${{obtenerTotalSeccion('seguros')[1]}}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #F9F9F9;"></th>
+                    <th colspan="3" class="font-weight-bold">
+                        SEGUROS
+                    </th>
+                    <th class="no-mostrar-columna"></th>
+                    <th class="no-mostrar-columna-2"></th>
+                </tr>
+                <tr>
+                    <th style="background-color: #F9F9F9;"></th>
+                    <th>Producto</th>
+                    <th class="no-mostrar-columna">Número de Póliza</th>
+                    <th class="no-mostrar-columna-2 text-right" title="Prima Total">P. Total</th>
+                    <th class="text-right" title="Valor Asegurado">V. Asegurado</th>
+                    <th title="Fecha de Vencimiento">F. Vencimiento</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr (click)="verDetalle(seguro, 'seguros' )" *ngFor="let seguro of seguros">
+                    <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
+                    <td>{{ enmascararNombreSeguro(seguro.descripcionTipo) }}</td>
+                    <td class="no-mostrar-columna">{{ truncarTexto(seguro.numeroPoliza, 5) }}</td>
+                    <td class="no-mostrar-columna-2 text-right">${{ obtenerNumeroFormateado(seguro.primaTotal) }}</td>
+                    <td class="text-right">${{ obtenerNumeroFormateado(seguro.valorAsegurado) }}</td>
+                    <td>{{ seguro.fechaVencimiento }}</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
+                    <td></td>
+                    <td class="no-mostrar-columna"></td>
+                    <td class="no-mostrar-columna-2"></td>
+                    <td class="font-weight-bold text-right"> ${{obtenerTotalSeccion('seguros', 'seguros')[0]}} </td>
+                    <td class="font-weight-bold text-right"> 
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="invisible-table-informacion-cuentas col-sm-12 col-md-10 col-lg-8 col-xl-7 mt-4" *ngIf="contingentes!.length > 0">
+            <thead>
+                <tr style="background-color: #F9F9F9;">
+                    <th class="invisible-table-informacion-cuentas__titulo-tabla break-spaces" colspan="2">
+                        <span *ngIf="seguros!.length == 0" class="font-weight-bold my-2">DATOS: </span>
+                    </th>
+                    <td class="no-mostrar-columna"></td>
+                    <td class="no-mostrar-columna-2"></td>
+                    <td class="font-weight-bold text-right">         
+                       <span [ngClass]="seguros!.length == 0 ? 'visible' : 'invisible'">
+                           ${{obtenerTotalSeccion('seguros')[0]}}
+                       </span>
+                    </td>
+                    <td class="font-weight-bold text-right"> 
+                        <span [ngClass]="seguros!.length == 0 ? 'visible' : 'invisible'">
+                            ${{obtenerTotalSeccion('seguros')[1]}}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #F9F9F9;"></th>
+                    <th colspan="3" class="font-weight-bold">
+                        CONTINGENTES
+                    </th>
+                    <th class="no-mostrar-columna"></th>
+                    <th class="no-mostrar-columna-2"></th>
+                </tr>
+                <tr>
+                    <th style="background-color: #F9F9F9;"></th>
+                    <th style="width: 80px !important;">Producto</th>
+                    <th class="no-mostrar-columna">Número</th>
+                    <th class="no-mostrar-columna-2">F. Vencimiento</th>
+                    <th class="text-right">Saldo Total</th>
+                    <th class="text-right">Efectivo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr (click)="verDetalle(contingente, 'contingentes' )" *ngFor="let contingente of contingentes; let indice = index">
+                    <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
+                    <td style="width: 80px !important;">{{ enmascararTipo( contingente.masa, contingente.tip ) }}</td>
+                    <td class="no-mostrar-columna">{{ contingente.mtcuenta }}</td>
+                    <td class="no-mostrar-columna-2">{{ enmascararFecha( contingente.vencimiento ) }}</td>
+                    <td class="text-right">$ {{ obtenerNumeroFormateado(contingente.saldoTotal) }}</td>
+                    <td class="text-right">$ {{ obtenerNumeroFormateado(contingente.efectivo) }}</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
+                    <td ></td>
+                    <td class="no-mostrar-columna"></td>
+                    <th class="no-mostrar-columna-2"></th>
+                    <td class="font-weight-bold text-right"> ${{obtenerTotalSeccion('seguros', 'contingentes')[0]}} </td>
+                    <td class="font-weight-bold text-right"> ${{obtenerTotalSeccion('seguros', 'contingentes')[1]}} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

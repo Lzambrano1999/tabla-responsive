@@ -1,0 +1,91 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins";
+@import '~@angular/material/theming';
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+$theme-colors: (
+  "primary":    #BC157C,
+  "secondary":  #40337C,
+  "success":    $success,
+  "info":       #c94496,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark,
+);
+/* For use in src/lib/core/theming/_palette.scss */
+$md-primary-bg: (
+    50 : #f7e3ef,
+    100 : #ebb9d8,
+    200 : #de8abe,
+    300 : #d05ba3,
+    400 : #c63890,
+    500 : #bc157c,
+    600 : #b61274,
+    700 : #ad0f69,
+    800 : #a50c5f,
+    900 : #97064c,
+    A100 : #ffc3dd,
+    A200 : #ff90c0,
+    A400 : #ff5da3,
+    A700 : #ff4394,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+/* For use in src/lib/core/theming/_palette.scss */
+/* For use in src/lib/core/theming/_palette.scss */
+$md-mcgpalette0: (
+    50 : #f4fdf3,
+    100 : #e3fae0,
+    200 : #d0f7cc,
+    300 : #bdf4b8,
+    400 : #aef1a8,
+    500 : #a0ef99,
+    600 : #98ed91,
+    700 : #8eeb86,
+    800 : #84e87c,
+    900 : #73e46b,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #f3fff2,
+    A700 : #dbffd9,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+$primary: mat-palette($md-primary-bg);
+$accent: mat-palette($md-mcgpalette0);
+
+$theme: mat-light-theme($primary, $accent);
+
+@include angular-material-theme($theme);
