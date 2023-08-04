@@ -250,9 +250,9 @@ line-height: 15px;
         width: fit-content;
     }
 
-    .text-right {
-        white-space: nowrap;
-    }
+    // .text-right {
+    //     white-space: nowrap;
+    // }
 
     tbody tr {
         &:hover {
@@ -403,6 +403,10 @@ line-height: 15px;
         display: revert !important;
     }
 
+    .ocultar-columna {
+        visibility: hidden;
+    }
+
     .invisible-table-informacion-cuentas {
         font-size: .7rem;
     
@@ -425,4 +429,8 @@ line-height: 15px;
     .logo-header-output {
         width: 30px;
     }
+}
+
+@media (min-width: 950px) {
+    
 }
