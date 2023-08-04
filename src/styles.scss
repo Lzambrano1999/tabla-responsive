@@ -241,7 +241,7 @@ line-height: 15px;
         width: fit-content;
         font-weight: bold;
         padding: 1em;
-        white-space: nowrap;
+        //white-space: nowrap;
     }
 
     td {
@@ -336,28 +336,20 @@ line-height: 15px;
     cursor: pointer;
 }
 
-@media (max-width: 500px) { 
-    .no-mostrar-columna-3 {
-        display: none;
+@media (max-width: 750px) {
+    .invisible-table-informacion-cuentas {
+        font-size: .8rem !important;
+
+        &__titulo-tabla.break-spaces{
+            white-space: break-spaces;
+            min-width: unset !important;
+            text-align: left;
+            padding-left: 4.5em;
+        }
     }
 
-    .mostrar-columna-3 {
-        display: flex !important;
-    }
-
-    .ver-mas-detalles-tabla {
-        display: inline !important;
-    }
-
-    .tabla-mas-detalles-contenedor {
-        display: revert !important;
-    }
-}
-
-
-@media (max-width: 650px) {
     .no-mostrar-columna-2 {
-        display: none;
+        display: none !important;
     }
 
     .mostrar-columna-2 {
@@ -374,6 +366,9 @@ line-height: 15px;
 }
 
 @media (max-width: 950px) {
+    .invisible-table-informacion-cuentas {
+        font-size: .95rem;
+    }
     .no-mostrar-columna {
         display: none;
     }
@@ -391,24 +386,42 @@ line-height: 15px;
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
+    .no-mostrar-columna-3 {
+        display: none;
+    }
+
+    .mostrar-columna-3 {
+        display: flex !important;
+    }
+
+    .ver-mas-detalles-tabla {
+        display: inline !important;
+    }
+
+    .tabla-mas-detalles-contenedor {
+        display: revert !important;
+    }
+
     .invisible-table-informacion-cuentas {
+        font-size: .7rem;
+    
         &__titulo-tabla {
             text-align: center;
         }
-
+    
         td, th {
             width: 0.5em !important;
         }
-
+    
         &__titulo-tabla.break-spaces{
             white-space: break-spaces;
             min-width: unset !important;
-            text-align: right;
+            text-align: center;
             padding-left: 4.5em;
         }
     }
-
+    
     .logo-header-output {
         width: 30px;
     }

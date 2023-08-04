@@ -14,7 +14,64 @@ export class InformacionCuentasComponent {
     ) { }
 
     public data: any = {
-        "seguros": [],
+        "seguros": [
+            {
+                "identificacion": "0918183518          ",
+                "descripcionTipo": "INCENDIO                                          ",
+                "numeroPoliza": "410147",
+                "valorAsegurado": 130560.00,
+                "fechaVigencia": "2023-07-01T00:00:00",
+                "fechaContratacion": "2023-07-27T00:00:00",
+                "fechaVencimiento": "2024-07-01T00:00:00",
+                "primaTotal": 290.29,
+                "descripcionTipoPlazo": "ANUAL               ",
+                "primaMensual": 0.00,
+                "estado": "  ",
+                "descripcionEstado": "                    "
+            },
+            {
+                "identificacion": "0918183518          ",
+                "descripcionTipo": "VIDA TERMINO                                      ",
+                "numeroPoliza": "2733",
+                "valorAsegurado": 220000.00,
+                "fechaVigencia": "2022-08-20T00:00:00",
+                "fechaContratacion": "2022-08-17T00:00:00",
+                "fechaVencimiento": "2023-08-20T00:00:00",
+                "primaTotal": 1167.32,
+                "descripcionTipoPlazo": "ANUAL               ",
+                "primaMensual": 0.00,
+                "estado": "  ",
+                "descripcionEstado": "                    "
+            },
+            {
+                "identificacion": "0918183518          ",
+                "descripcionTipo": "VIDA TERMINO                                      ",
+                "numeroPoliza": "DF2EC0076997620",
+                "valorAsegurado": 4.17,
+                "fechaVigencia": "2022-05-26T00:00:00",
+                "fechaContratacion": "2022-06-01T00:00:00",
+                "fechaVencimiento": "2023-07-26T00:00:00",
+                "primaTotal": 4.17,
+                "descripcionTipoPlazo": "MENSUAL             ",
+                "primaMensual": 4.01,
+                "estado": "AP",
+                "descripcionEstado": "ACTIVO PAGO         "
+            },
+            {
+                "identificacion": "0918183518          ",
+                "descripcionTipo": "VIDA TERMINO                                      ",
+                "numeroPoliza": "DF2EC0081407581",
+                "valorAsegurado": 12.97,
+                "fechaVigencia": "2023-02-27T00:00:00",
+                "fechaContratacion": "2023-03-01T00:00:00",
+                "fechaVencimiento": "2023-07-27T00:00:00",
+                "primaTotal": 12.97,
+                "descripcionTipoPlazo": "MENSUAL             ",
+                "primaMensual": 12.47,
+                "estado": "AP",
+                "descripcionEstado": "ACTIVO PAGO         "
+            }
+        ],
         "tarjetas": [
             {
               "cuentas": "Cuenta1",
@@ -556,17 +613,8 @@ export class InformacionCuentasComponent {
     }
 
     enmascararFecha( fecha: string ) {
-        let fechaFormateada = '';
-        fecha = fecha.toString();
-
-        if (fecha !== null && fecha.trim() !== '' && fecha !== '0' ) {
-            const anio = fecha.slice(0, 4);
-            const mes = fecha.slice(4, 6);
-            const dia = fecha.slice(6);
-    
-            fechaFormateada = `${dia}/${mes}/${anio}`;
-        }
-
+        let fechaFormateada = '12/03/2025';
+       
        return fechaFormateada; 
     }
 

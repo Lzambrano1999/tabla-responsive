@@ -9,7 +9,7 @@
                         <span class="font-weight-bold my-2">DATOS: </span>
                     </th>
                     <td ></td>
-                    <td class="no-mostrar-columna-2"></td>
+                    <td class="no-mostrar-columna"></td>
                     <td class="font-weight-bold text-right">         
                         ${{obtenerTotalSeccion('pasivos')[0]}}
                     </td>
@@ -23,7 +23,7 @@
                         CUENTAS
                     </th>
                     <th ></th>
-                    <th class="no-mostrar-columna-2"></th>
+                    <th class="no-mostrar-columna"></th>
                 </tr>
                 <tr>
                     <th style="background-color: #F9F9F9;"></th>
@@ -47,7 +47,7 @@
                     <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
                     <td></td>
                     <td ></td>
-                    <td class="no-mostrar-columna-2"></td>
+                    <td class="no-mostrar-columna"></td>
                     <td class="font-weight-bold text-right"> ${{obtenerTotalSeccion('pasivos', 'cuentas')[0]}} </td>
                     <td class="font-weight-bold text-right"> ${{obtenerTotalSeccion('pasivos', 'cuentas')[1]}} </td>
                 </tr>
@@ -61,7 +61,7 @@
                         <span *ngIf="cuentas!.length == 0 && otrosPasivos!.length == 0" class="font-weight-bold my-2">PASIVOS: </span>
                     </th>
                     <td ></td>
-                    <td class="no-mostrar-columna-2"></td>
+                    <td class="no-mostrar-columna"></td>
                     <td class="font-weight-bold text-right">         
                        <span [ngClass]=" (cuentas!.length == 0 && otrosPasivos!.length == 0) ? 'visible' : 'invisible'">
                            ${{obtenerTotalSeccion('pasivos')[0]}}
@@ -79,7 +79,7 @@
                         INVERSIONES
                     </th>
                     <th ></th>
-                    <th class="no-mostrar-columna-2"></th>
+                    <th class="no-mostrar-columna"></th>
                 </tr>
                 <tr>
                     <th style="background-color: #F9F9F9;"></th>
@@ -103,7 +103,7 @@
                     <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
                     <td ></td>
                     <td ></td>
-                    <th class="no-mostrar-columna-2"></th>
+                    <th class="no-mostrar-columna"></th>
                     <td class="font-weight-bold text-right"> </td>
                     <td class="font-weight-bold text-right"> ${{obtenerTotalSeccion('pasivos', 'inversiones')[0]}} </td>
                 </tr>
@@ -117,7 +117,7 @@
                         <span *ngIf="cuentas!.length == 0 && inversiones!.length == 0" class="font-weight-bold my-2">PASIVOS: </span>
                     </th>
                     <td ></td>
-                    <td class="no-mostrar-columna-2"></td>
+                    <td class="no-mostrar-columna"></td>
                     <td class="font-weight-bold text-right">         
                        <span [ngClass]="(cuentas!.length == 0 && inversiones!.length == 0) ? 'visible' : 'invisible'">
                            ${{obtenerTotalSeccion('pasivos')[0]}}
@@ -135,7 +135,7 @@
                         OTROS PASIVOS
                     </th>
                     <th ></th>
-                    <th class="no-mostrar-columna-2"></th>
+                    <th class="no-mostrar-columna"></th>
                 </tr>
                 <tr>
                     <th style="background-color: #F9F9F9;"></th>
@@ -159,7 +159,7 @@
                     <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
                     <td ></td>
                     <td ></td>
-                    <th class="no-mostrar-columna-2"></th>
+                    <th class="no-mostrar-columna"></th>
                     <td class="font-weight-bold text-right"> ${{obtenerTotalSeccion('pasivos', 'otros')[0]}} </td>
                     <td class="font-weight-bold text-right"> 
                     </td>
@@ -176,7 +176,7 @@
                         <span class="font-weight-bold my-2">DATOS: </span>
                     </th>
                     <td ></td>
-                    <td class="no-mostrar-columna-2"></td>
+                    <td class="no-mostrar-columna"></td>
                     <td class="font-weight-bold text-right">
                         ${{obtenerTotalSeccion('activos')[0]}}
                     </td>
@@ -190,7 +190,7 @@
                         TARJETAS
                     </th>
                     <td ></td>
-                    <td class="no-mostrar-columna-2"></td>
+                    <td class="no-mostrar-columna"></td>
                 </tr>
                 <tr>
                     <th style="background-color: #F9F9F9;"></th>
@@ -198,7 +198,7 @@
                     <th class="no-mostrar-columna">Número</th>
                     <th >Relación</th>
                     <th class="text-right">Cupo</th>
-                    <th class="text-right">Disponible</th>
+                    <th style="min-width: 124px !important;" class="text-right">Disponible</th>
                 </tr>
             </thead>
             <tbody>
@@ -214,7 +214,7 @@
                     <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
                     <td></td>
                     <td ></td>
-                    <td class="no-mostrar-columna-2"></td>
+                    <td class="no-mostrar-columna"></td>
                     <td class="font-weight-bold text-right"> ${{obtenerTotalSeccion('activos', 'tarjeta')[0]}} </td>
                     <td class="font-weight-bold text-right"> ${{obtenerTotalSeccion('activos', 'tarjeta')[1]}} </td>
                 </tr>
@@ -361,7 +361,7 @@
                 <tr>
                     <th style="background-color: #F9F9F9;"></th>
                     <th>Producto</th>
-                    <th class="no-mostrar-columna">Número de Póliza</th>
+                    <th class="no-mostrar-columna" title="Número de Póliza">  {{ truncarTexto("Número de Póliza", 6) }} </th>
                     <th class="no-mostrar-columna-2 text-right" title="Prima Total">P. Total</th>
                     <th class="text-right" title="Valor Asegurado">V. Asegurado</th>
                     <th title="Fecha de Vencimiento">F. Vencimiento</th>
@@ -374,7 +374,7 @@
                     <td class="no-mostrar-columna">{{ truncarTexto(seguro.numeroPoliza, 5) }}</td>
                     <td class="no-mostrar-columna-2 text-right">${{ obtenerNumeroFormateado(seguro.primaTotal) }}</td>
                     <td class="text-right">${{ obtenerNumeroFormateado(seguro.valorAsegurado) }}</td>
-                    <td>{{ seguro.fechaVencimiento }}</td>
+                    <td>{{ enmascararFecha( seguro.fechaVencimiento ) }}</td>
                 </tr>
                 <tr>
                     <td style="background-color: #F9F9F9; min-width: 60px !important; width: 60px !important"></td>
